@@ -1,7 +1,8 @@
 **/.DS_Store
 **.log
 node_modules
-config/*
-!config/sample/*
+
+./config/*
+!./config/sample/*
 
 

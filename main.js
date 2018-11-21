@@ -12,6 +12,8 @@ var settings = {
     depth: 5
 };
 
+var config;
+
 function load() {
     config = {};
     readdirp(settings,
@@ -27,6 +29,8 @@ function load() {
         }, 
     
         function (err, res) {
+            console.log('Load the Configuration');
+            console.log(config);
             if(err){
                 fastify.log.error("Error happened when loop the file system");
                 throw err;

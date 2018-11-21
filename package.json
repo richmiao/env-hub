@@ -1,0 +1,21 @@
+{
+  "name": "parameter-hub",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node main.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.pwc.com:jeremy-bao/param-hub.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^6.1.0",
+    "fastify": "^1.13.0",
+    "readdirp": "^2.2.1"
+  }
+}

@@ -1,4 +1,4 @@
-# Parameter Center
+# Configuration Center
 
 
 ### Install

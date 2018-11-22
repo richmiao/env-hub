@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node main.js",
+    "jwt": "node jwt_gen.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -16,6 +17,9 @@
   "dependencies": {
     "dotenv": "^6.1.0",
     "fastify": "^1.13.0",
-    "readdirp": "^2.2.1"
+    "fastify-jwt": "^0.7.0",
+    "jsonwebtoken": "^8.4.0",
+    "readdirp": "^2.2.1",
+    "readline-sync": "^1.4.9"
   }
 }

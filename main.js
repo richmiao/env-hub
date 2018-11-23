@@ -75,20 +75,20 @@ fastify.get('/api/v1/refresh', async (request, reply) => {
     load();
     return "The config info is refreshed !";
 })
-
+// Declare a route for heath check
+fastify.get('/', async (request, reply) => {
+    return "hello";
+})
 // Declare a route for heath check
 fastify.get('/api/v1/ping', async (request, reply) => {
     return "pong";
 })
 
 // Run the server!
-const start = async () => {
-    try {
-        await fastify.listen(8888)
-        console.log(`server listening on ${fastify.server.address().port}`)
-    } catch (err) {
-        fastify.log.error(err)
-        process.exit(1)
+fastify.listen(7777, '0.0.0.0', function (err, address) {
+    if (err) {
+      fastify.log.error(err)
+      process.exit(1)
     }
-}
-start()
+    fastify.log.info(`server listening on ${address}`)
+})

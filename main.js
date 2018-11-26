@@ -2,9 +2,7 @@
 const fastify = require('fastify')()
 const fs = require("fs");
 const readdirp = require('readdirp');
-const {
-    parse
-} = require('dotenv');
+const { parse } = require('dotenv');
 const jwt = require("jsonwebtoken");
 
 var settings = {
@@ -49,6 +47,7 @@ load();
 
 // Declare a route for get config
 fastify.get('/api/v1/env/:path', async (request, reply) => {
+    if(!request.headers.authorization) return "Auth Error: No JWT Token";
     const token = request.headers.authorization.substring(7); //remove `Bearer`
     var result = '';
     try {

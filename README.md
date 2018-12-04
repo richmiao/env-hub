@@ -1,61 +1,41 @@
-# Configuration Center
+
+# eventhub desktop
+this project setup is originally forked from Fabric-Samples/balance-transfer. The intend is to build develop two things.
+1. The configuration Hub application
+2. A boilerplate that can be used to kickstart further project more quickly.
+
+# Project
+This project will setup a minimal hyperledger fabric network, with CouchDB as storrage in the peer.
+The application will use the network with a single user. like a user for Mysql, where you do not give every single enduser an account,
+but the endusers are handled as part of the application logic.
+
+It will introduce a chaincode, that will allow to expose APIs, that are similar to mongoDB. As the project progress, even
+Indexes will be supported.
+
+An application should live in a single Hyperledger Fabric channel. For each Collection a new chaincode will be instantiated.
+the code is actually the same souce-code file, but installed with the collection name as its name. 
+This will make full use of Fabric's channel/chaincode structure. 
 
 
-### Install
-```shell
-$ npm i
-$ npm start
-```
-### How to use
-1. put your project level config file in `/config`
-2. renew the config info with `curl http://localhost:7777/api/v1/refresh`
-3. request the config info with 
-
-```shell
-curl -X GET \
-  http://localhost:7777/api/v1/env/sample.dev.json \
-  -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1NDY0NTg5OTAsImRhdGEiOnsiZW1haWwiOiJqZXJlbXkuYmFvQHB3Yy5jb20iLCJwcm9qZWN0Ijoic2FtcGxlIiwicGF0aCI6InNhbXBsZS5kZXYuanNvbiIsImVudiI6ImRldiJ9LCJpYXQiOjE1NDI4NTg5OTR9.wsWBxhHFyhrAMJMbYe8coUndM6GbNCMNKgrpB1vO8-Q' \
-  -H 'cache-control: no-cache'
-```
-
-For example, if you have a project called `XXX`, there are 3 types of config files for 3 different enviroments: `dev.json`, `uat.json`, `prod.json`. you can just put these files like
-```
-        --config
-            |
-            |--XXX
-                |
-                |--dev.json
-                |--prod.json
-                |--uat.json
-```
-If you want to access the config for XXX project's dev configure, you just need to `curl http://localhost:7777/api/v1/parameters/config.XXX.dev.json`
 
 
-### How to get a JWT token
+# changes to this project
 
-```shell
-$ npm run jwt
-Welcome to the JWT Certificate Generator Tool
-What's the email for your target user: jeremy.bao@pwc.com
-Which project config info you want to access ? sample
-Which enviroment info you want to access (dev, uat or prod)? dev
-How much days would you need for this certificate ? 1000
-We will use path as the token signature, What's the confg file path (e.g. gothom.dev.json) ? sample.dev.json
-Thanks for your input:
-payload =>{"exp":1546459379,"data":{"email":"jeremy.bao@pwc.com","project":"sample","path":"sample.dev.json","env":"dev"}}
-signature => sample.dev.json
-Can you confirm above info before generating the token(y/n)? y
-{ exp: 1546459379,
-  data:
-   { email: 'jeremy.bao@pwc.com',
-     project: 'sample',
-     path: 'sample.dev.json',
-     env: 'dev' },
-  iat: 1542859383 }
-Your JWT Token is:
-eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1NDY0NTkzNzksImRhdGEiOnsiZW1haWwiOiJqZXJlbXkuYmFvQHB3Yy5jb20iLCJwcm9qZWN0Ijoic2FtcGxlIiwicGF0aCI6InNhbXBsZS5kZXYuanNvbiIsImVudiI6ImRldiJ9LCJpYXQiOjE1NDI4NTkzODN9.cRBQhvTXoLlVoZ1J64aJqxaMiBKmKuBwWD8rQkfjck8
-➜  param-hub git:(master) ✗
-```
-          
 
-eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1NzkxMjU3ODAsImRhdGEiOnsiZW1haWwiOiJqZXJlbXkuYmFvQHB3Yy5jb20iLCJwcm9qZWN0IjoiaGF3a2V5ZSIsInBhdGgiOiJoYXdrZXllLmRldi5qc29uIiwiZW52IjoiZGV2In0sImlhdCI6MTU0MzEyNTc4M30.euGYXDhWRhdooBiDIBnuVKRohbQiJaGSVAmwWhb_mBI
+
+# start this project
+
+
+docker run -it -v=$(pwd)/artifacts/channel:/work -w=/work --network=artifacts_default  hyperledger/fabric-tools bash
+  cryptogen generate
+  exit
+
+
+./runApp.sh
+
+docker run -it -v=$(pwd):/work -w=/work --network=artifacts_default -p=4000:4000 node bash
+  export NODE_TLS_REJECT_UNAUTHORIZED=0
+  npm config set strict-ssl false
+  npm install 
+  npm run start
+

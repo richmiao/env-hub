@@ -30,6 +30,7 @@ var cors = require('cors');
 require('tasyncexpress');
 
 require('./config.js');
+var config = require('./config.json');
 var hfc = require('fabric-client');
 
 var helper = require('./app/helper.js');
@@ -57,8 +58,9 @@ app.use(bodyParser.urlencoded({
 
 app.use(bearerToken());
 app.use(function(req, res, next) {
-	req.username = req.username || req.username || req.body.username;
-	req.orgname = req.username || req.body.orgname;
+	req.username = config.admins[0].name
+	req.orgname = config.orgname;
+	next();
 });
 
 ///////////////////////////////////////////////////////////////////////////////

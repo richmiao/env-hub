@@ -13,7 +13,6 @@ module.exports.authMiddleware = async(req, res, next)=>{
     if(!user) throw new Error('wrong user credentials');
   }
   // todo: 
-  var users = 
 }
 
 authenticateCredentials = async (username,password)=>{

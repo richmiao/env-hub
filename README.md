@@ -27,7 +27,21 @@ This will make full use of Fabric's channel/chaincode structure.
 
 
 docker run -it -v=$(pwd)/artifacts/channel:/work -w=/work --network=artifacts_default  hyperledger/fabric-tools bash
-  cryptogen generate
+  cryptogen generate --config=./cryptogen.yaml
+  configtxgen -profile OneOrgsChannel -channelID ConfigHubChannel -outputCreateChannelTx ConfigHubChannel.tx --configPath .
+  
+  cd ./crypto-config/peerOrganizations/org1.example.com/ca
+  file=$(ls *_sk)
+  mv "${file}" org1ca_sk
+  cd ../../../..
+
+  cd ./crypto-config/ordererOrganizations/example.com/ca
+  file=$(ls *_sk)
+  mv "${file}" org1ca_sk
+  cd ../../../..
+
+  configtxgen -profile OneOrgsOrdererGenesis -outputBlock ./genesis.block --configPath .
+
   exit
 
 

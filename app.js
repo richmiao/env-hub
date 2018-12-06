@@ -23,8 +23,6 @@ var bodyParser = require('body-parser');
 var http = require('http');
 var util = require('util');
 var app = express();
-var expressJWT = require('express-jwt');
-var jwt = require('jsonwebtoken');
 var bearerToken = require('express-bearer-token');
 var cors = require('cors');
 require('tasyncexpress');
@@ -102,16 +100,11 @@ app.post('/users', async function(req, res) {
 		res.json(getErrorMessage('\'orgname\''));
 		return;
 	}
-	var token = jwt.sign({
-		exp: Math.floor(Date.now() / 1000) + parseInt(hfc.getConfigSetting('jwt_expiretime')),
-		username: username,
-		orgname: orgname
-	}, app.get('secret'));
+
 	let response = await helper.getRegisteredUser(username, orgname, true);
 	logger.debug('-- returned from registering the username %s for organization %s',username,orgname);
 	if (response && typeof response !== 'string') {
 		logger.debug('Successfully registered the username %s for organization %s',username,orgname);
-		response.token = token;
 		res.json(response);
 	} else {
 		logger.debug('Failed to register the username %s for organization %s with::%s',username,orgname,response);
@@ -394,4 +387,14 @@ app.get('/channels', async function(req, res) {
 
 	let message = await query.getChannels(peer, req.username, req.orgname);
 	res.send(message);
+});
+
+
+app.use((err,req,res,next)=>{
+    console.log(err);
+		res.json({
+			error:true,
+			message:err.message,
+			stack:err.stack,
+		});
 });

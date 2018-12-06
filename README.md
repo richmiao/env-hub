@@ -53,3 +53,24 @@ docker run -it -v=$(pwd):/work -w=/work --network=artifacts_default -p=4000:4000
   npm install 
   npm run start
 
+
+
+# Todo's
+installing native node modules can realy be a pain in the ass!!! 
+it would be good if we could download prepackaged binaries
+
+for GRPC the prebuild binaries are here:
+https://node-precompiled-binaries.grpc.io/grpc/v1.14.2/node-v57-linux-x64-glibc.tar.gz
+
+
+# Issues
+## node.js chainode
+we can not use node.js Chaincode. that would make it so much easyer to build general purpose or generic chaincodes then
+using go-lang.
+We can not use them, because the peer is going to create a chaincode container, that container need to install
+the module x509. That module uses native components and need to download something using GYP. GYP is a tool to compile
+node-modules. Usially we can set an environment variable to accept selfsifned certificates. but as the container is 
+created by the peer software, we can not (in reasonable amount of time) pass that variable to that dynamic created
+container. 
+The problem might occur because of the office network or because of the chinese firewall.
+

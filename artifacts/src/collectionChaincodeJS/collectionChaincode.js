@@ -33,7 +33,7 @@ var Chaincode = class {
 
       console.info('\nCalling method : ' + fcn);
       let payload = await method(stub, args);
-      return shim.success(payload);
+      return shim.success(Buffer.from(payload));
     } catch (err) {
       console.log(err);
       return shim.error(err);

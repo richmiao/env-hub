@@ -4,7 +4,7 @@
 # blockchain network that are necessary for the applications to interact with it. These are all
 # knowledge that must be acquired from out-of-band sources. This file provides such a source.
 #
-name: "balance-transfer-org1"
+name: "org1"
 
 #
 # Any properties with an "x-" prefix will be treated as application-specific, exactly like how naming
@@ -47,7 +47,7 @@ client:
     # not.
     cryptoStore:
       # Specific to the underlying KeyValueStore that backs the crypto key store.
-      path: "/tmp/fabric-client-kv-org1"
+      path: "./fabric-client-kv-org1/cryptoKeystore"
 
     # [Optional]. Specific to Composer environment
     wallet: wallet-name

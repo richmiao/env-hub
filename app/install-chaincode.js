@@ -55,7 +55,7 @@ var installChaincode = async function(peers, chaincodeName, chaincodePath,
 				one_good = true;
 				logger.info('install proposal was good');
 			} else {
-				logger.error('install proposal was bad %j',proposalResponses.toJSON());
+				logger.error('install proposal was bad %j',proposalResponses);
 			}
 			all_good = all_good & one_good;
 		}

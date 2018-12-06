@@ -4,7 +4,8 @@
   "description": "A balance-transfer example node program to demonstrate using node.js SDK APIs",
   "main": "app.js",
   "scripts": {
-    "start": "node app.js"
+    "start": "node app.js",
+    "watch": "nodemon app.js"
   },
   "keywords": [
     "fabric-client sample app",
@@ -30,6 +31,7 @@
     "fs-extra": "^2.0.0",
     "jsonwebtoken": "^7.3.0",
     "log4js": "^0.6.38",
+    "nodemon": "^1.18.7",
     "superstruct": "^0.6.0",
     "tasyncexpress": "^1.0.2",
     "tnfetch": "0.0.6",

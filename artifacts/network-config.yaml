@@ -115,7 +115,7 @@ organizations:
 #
 orderers:
   orderer.example.com:
-    url: grpcs://orderer.example.com:7050
+    url: grpc://orderer.example.com:7050
 
     # these are standard properties defined by the gRPC library
     # they will be passed in as-is to gRPC client constructor
@@ -132,12 +132,12 @@ orderers:
 peers:
   peer0.org1.example.com:
     # this URL is used to send endorsement and query requests
-    url: grpcs://peer0.org1.example.com:7051
+    url: grpc://peer0.org1.example.com:7051
 
-    grpcOptions:
-      ssl-target-name-override: peer0.org1.example.com
-    tlsCACerts:
-      path: artifacts/channel/crypto-config/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/tls/ca.crt
+    # grpcOptions:
+    #   ssl-target-name-override: peer0.org1.example.com
+    # tlsCACerts:
+    #   path: artifacts/channel/crypto-config/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/tls/ca.crt
 
 #
 # Fabric-CA is a special kind of Certificate Authority provided by Hyperledger Fabric which allows
@@ -146,13 +146,13 @@ peers:
 #
 certificateAuthorities:
   ca-org1:
-    url: https://ca-org1:7054
+    url: http://ca-org1:7054
     # the properties specified under this object are passed to the 'http' client verbatim when
     # making the request to the Fabric-CA server
     httpOptions:
       verify: false
-    tlsCACerts:
-      path: artifacts/channel/crypto-config/peerOrganizations/org1.example.com/ca/ca.org1.example.com-cert.pem
+    # tlsCACerts:
+    #   path: artifacts/channel/crypto-config/peerOrganizations/org1.example.com/ca/ca.org1.example.com-cert.pem
 
     # Fabric-CA supports dynamic user enrollment via REST APIs. A "root" user, a.k.a registrar, is
     # needed to enroll and invoke new users.

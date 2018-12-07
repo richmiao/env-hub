@@ -1,6 +1,9 @@
-curl -X POST /chaincodes \
-  -h "Content-Type: applicaiton/json" \
-  -d '{}'
+
+
+curl -s -X POST \
+  http://localhost:4000/users \
+  -H "content-type: application/json" \
+  -d '{"username":"tobias","orgname":"org1"}'
 
 echo create channel
 curl -s -X POST \
@@ -28,18 +31,17 @@ curl -s -X POST \
 	\"chaincodeName\":\"users\",
 	\"chaincodePath\":\"collectionChaincodeGO\",
 	\"chaincodeType\": \"golang\",
-	\"chaincodeVersion\":\"v2\"
+	\"chaincodeVersion\":\"v1\"
 }"
 
 echo "Instantiate chaincode"
 curl -s -X POST \
   http://localhost:4000/channels/confighubchannel/chaincodes \
-  -H "authorization: Bearer $org1_TOKEN" \
   -H "content-type: application/json" \
   -d "{
 	\"peers\": [\"peer0.org1.example.com\"],
 	\"chaincodeName\":\"users\",
-	\"chaincodeVersion\":\"v2\",
+	\"chaincodeVersion\":\"v1\",
 	\"chaincodeType\": \"golang\",
 	\"args\":[\"\"]
 }"
